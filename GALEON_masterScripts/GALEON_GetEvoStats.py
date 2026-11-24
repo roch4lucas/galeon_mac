@@ -553,11 +553,13 @@ def GetStatistics_and_RunMWtest(i_FAMname, i_bedfile, i_evodistfile, i_clusterfi
     ##############
     ''' Run Mann-Whitney test '''
     gMW_test_results = []
+    glob_pvalue = "-"
+    globsigf_Stat = "-"
 
     # Globally, considering all the genes
     glob_Tempdict = dict(Counter(DF_MWdata["GenePair_status"]))
-    gC_count = glob_Tempdict["Clustered"]
-    gNC_count = glob_Tempdict["NotClustered"]
+    gC_count = glob_Tempdict.get("Clustered", 0)
+    gNC_count = glob_Tempdict.get("NotClustered", 0)
 
 
     if gC_count == 0 or gNC_count == 0:

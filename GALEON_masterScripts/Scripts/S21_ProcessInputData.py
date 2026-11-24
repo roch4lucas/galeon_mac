@@ -240,9 +240,9 @@ CheckBedtools(bedtoolsPATH)
 def grep_entries(i_file, o_file, i_fileformat, i_featname=None):
 
 	if i_fileformat == "gff3":
-		grep_cmd = f"grep -P '\\t{i_featname}\\t' {i_file} > {o_file}"
-		sortcluster_cmd = f"grep -P '\\t{i_featname}\\t' {i_file} | cut -f1,4,5,9 | sort -k1,1 -k2,2n | bedtools cluster -i - > {o_file}.bedclust\n"
-		grep_count = f"grep -cP '\\t{i_featname}\\t' {o_file}"
+		grep_cmd = f"awk -F'\\t' '$3 == \"{i_featname}\"' {i_file} > {o_file}"
+		sortcluster_cmd = f"awk -F'\\t' '$3 == \"{i_featname}\"' {i_file} | cut -f1,4,5,9 | sort -k1,1 -k2,2n | bedtools cluster -i - > {o_file}.bedclust\n"
+		grep_count = f"wc -l < {o_file}"
 
 		subprocess.run(grep_cmd, shell=True, text=True)
 		subprocess.run(sortcluster_cmd, shell=True, text=True)
