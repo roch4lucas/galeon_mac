@@ -179,7 +179,7 @@ def CreateDF_for_UnclusteredGenes(i_DFClustInfo, i_DFCoords, iTwoFamAnalysis, oT
         outDF = pd.DataFrame.from_records(outinfo)
 
         # Name the columns
-        outDF.columns = ["ScaffoldID", "ClusterID", "GenesNumber", "GeneID"]
+        outDF = pd.DataFrame(columns=["ScaffoldID", "ClusterID", "GenesNumber", "GeneID"]) if outDF.empty else outDF.set_axis(["ScaffoldID", "ClusterID", "GenesNumber", "GeneID"], axis=1)
         
         return outDF
     
@@ -206,7 +206,7 @@ def CreateDF_for_UnclusteredGenes(i_DFClustInfo, i_DFCoords, iTwoFamAnalysis, oT
         outDF = pd.DataFrame.from_records(outinfo)
 
         # Name the columns
-        outDF.columns = ["ScaffoldID", "ClusterID", "GenesNumber", "GeneID"]
+        outDF = pd.DataFrame(columns=["ScaffoldID", "ClusterID", "GenesNumber", "GeneID"]) if outDF.empty else outDF.set_axis(["ScaffoldID", "ClusterID", "GenesNumber", "GeneID"], axis=1)
 
         # Add an additional column with modified gene names (FamID + geneID)
         outDF["GeneID_temp"] = outDF["GeneID"].map(oTwoFamdict)    
