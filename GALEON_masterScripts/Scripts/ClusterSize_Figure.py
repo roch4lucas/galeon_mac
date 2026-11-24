@@ -311,7 +311,7 @@ def MultipleScf_Barplot(iFreqDF, iScafColName, inewDF, inumclust, oDir, icolor_o
     
     
     for ix, a in enumerate(ax1.patches):
-        if inewDF.loc[ix, 'Frequency'] == 0:
+        if ix in inewDF.index and inewDF.loc[ix, 'Frequency'] == 0:
             x_start = a.get_x()
             width = a.get_width()
 
